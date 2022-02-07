@@ -363,6 +363,11 @@ namespace RestauranteAPI.Conexoes
                     cmd.Parameters.AddWithValue("mesa", reserva.Mesa);
 
                     cmd.ExecuteNonQuery();
+
+                    if (cmd.ExecuteNonQuery() == 0)
+                    {
+                        throw new InvalidOperationException("A reserva não foi atualizado!");
+                    }
                 }
             }
             finally
@@ -385,6 +390,12 @@ namespace RestauranteAPI.Conexoes
                 {
                     cmd.Parameters.AddWithValue("cliente", cliente);
                     cmd.ExecuteNonQuery();
+
+
+                    if (cmd.ExecuteNonQuery() == 0)
+                    {
+                        throw new InvalidOperationException("A reserva não foi deletada!");
+                    }
 
                 }
             }
@@ -467,6 +478,8 @@ namespace RestauranteAPI.Conexoes
 
                         reservas.Add(reserva);
                     }
+
+                    throw new InvalidOperationException("Reserva não encontrada!");
                 }
             }
             finally
@@ -511,7 +524,8 @@ namespace RestauranteAPI.Conexoes
                         mesa.Identificador = Convert.ToInt32(rdr["Identificador"]);
                         mesas.Add(mesa);
                     }
-                    
+                    throw new InvalidOperationException("Sua consulta não pode ser finalizada!");
+
                 }
             }
             finally

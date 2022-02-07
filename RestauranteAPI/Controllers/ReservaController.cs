@@ -22,15 +22,42 @@ namespace RestauranteAPI.Controllers
         }
 
         [HttpPut("v1/AtualizarReservaMesa")]
-        public void AtualizarReservaMesa(Model.ReservaMesa reserva)
+        public IActionResult AtualizarReservaMesa(Model.ReservaMesa reserva)
         {
-            _sql.AtualizarReserva(reserva);
+            try
+            {
+                _sql.AtualizarReserva(reserva);
+
+                return StatusCode(200);
+            }
+            catch (InvalidOperationException ex)
+            {
+                return StatusCode(400, ex.Message);
+            }
+            catch (Exception)
+            {
+                return StatusCode(500);
+            }
         }
 
         [HttpDelete("v1/DeletarReservaMesa/{cliente}")]
-        public void DeletarReservaMesa(string cliente)
+        public IActionResult DeletarReservaMesa(string cliente)
         {
-            _sql.DeletarReserva(cliente);
+            try
+            {
+
+                _sql.DeletarReserva(cliente);
+
+                return StatusCode(200);
+            }
+            catch (InvalidOperationException ex)
+            {
+                return StatusCode(400, ex.Message);
+            }
+            catch (Exception)
+            {
+                return StatusCode(500);
+            }
         }
 
         [HttpGet("v1/SelecionarReservaMesa/{identificador}")]
@@ -53,15 +80,42 @@ namespace RestauranteAPI.Controllers
         }
 
         [HttpGet("v1/ConsultarMesasDisponiveis/{inicioReserva}/{fimReserva}/{quantidadeCadeiras}")]
-        public List<Model.Mesa> ConsultarMesasDisponiveis(DateTime inicioReserva, DateTime fimReserva, int quantidadeCadeiras)
+        public IActionResult ConsultarMesasDisponiveis(DateTime inicioReserva, DateTime fimReserva, int quantidadeCadeiras)
         {
-            return _sql.ConsultarMesasDisponiveis(inicioReserva, fimReserva, quantidadeCadeiras);
+
+            try
+            {
+                var mesasDisponiveis = _sql.ConsultarMesasDisponiveis(inicioReserva, fimReserva, quantidadeCadeiras);
+
+                return StatusCode(200, mesasDisponiveis);
+            }
+            catch (InvalidOperationException ex)
+            {
+                return StatusCode(400, ex.Message);
+            }
+            catch (Exception)
+            {
+                return StatusCode(500);
+            }
         }
 
         [HttpGet("v1/ListarReservas")]
-        public List<Model.ReservaMesa> ListarReservas()
+        public IActionResult ListarReservas()
         {
-            return _sql.ListarReservasMesas();
+            try
+            {
+                var reservas =  _sql.ListarReservasMesas();
+
+                return StatusCode(200, reservas);
+            }
+            catch (InvalidOperationException ex)
+            {
+                return StatusCode(400, ex.Message);
+            }
+            catch (Exception)
+            {
+                return StatusCode(500);
+            }
         }
 
     }
