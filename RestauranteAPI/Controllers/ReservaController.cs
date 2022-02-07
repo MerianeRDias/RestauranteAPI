@@ -38,9 +38,9 @@ namespace RestauranteAPI.Controllers
         {
             try
             {
-                var mesa = _sql.SelecionarMesa(identificador);
+                var reserva = _sql.SelecionarReserva(identificador);
 
-                return StatusCode(200, mesa);
+                return StatusCode(200, reserva);
             }
             catch (InvalidOperationException ex)
             {
