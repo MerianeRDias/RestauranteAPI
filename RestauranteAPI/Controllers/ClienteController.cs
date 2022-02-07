@@ -16,7 +16,7 @@ namespace RestauranteAPI.Controllers
             _sql = new Conexoes.Sql();
         }
 
-        [HttpPost ("v1/Cliente")] 
+        [HttpPost ("v1/CadastrarCliente")] 
         public IActionResult CadastrarCliente(Model.Cliente cliente)
         {
             try 
@@ -47,7 +47,7 @@ namespace RestauranteAPI.Controllers
         }
 
 
-        [HttpPut("v1/Cliente")]
+        [HttpPut("v1/AtualizarCliente")]
         public IActionResult AtualizarCliente(Model.Cliente cliente)
         {
             try
@@ -67,7 +67,7 @@ namespace RestauranteAPI.Controllers
 
         }
 
-        [HttpDelete("v1/Cliente")]
+        [HttpDelete("v1/DeletarCliente")]
         public IActionResult DeletarCliente(Model.Cliente cliente)
         {
             try
@@ -87,7 +87,7 @@ namespace RestauranteAPI.Controllers
 
         }
 
-        [HttpGet("v1/Cliente/{cpf}")]
+        [HttpGet("v1/SelecionarCliente/{cpf}")]
         public IActionResult SelecionarCliente(string cpf)
         {
             try
@@ -107,7 +107,7 @@ namespace RestauranteAPI.Controllers
 
         }
 
-        [HttpGet("v1/Cliente")]
+        [HttpGet("v1/ListarClientes")]
         public IActionResult ListarClientes()
         {
             try

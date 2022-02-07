@@ -15,7 +15,7 @@ namespace RestauranteAPI.Controllers
             _sql = new Conexoes.Sql();
         }
 
-        [HttpPost ("v1/Mesa")]
+        [HttpPost ("v1/CadastrarMesa")]
         public IActionResult CadastrarMesa(Model.Mesa mesa)
         {
             try
@@ -40,7 +40,7 @@ namespace RestauranteAPI.Controllers
             }
         }
 
-        [HttpPut("v1/Mesa")]
+        [HttpPut("v1/AtualizarMesa")]
         public IActionResult AtualizarMesa(Model.Mesa mesa)
         {
             try
@@ -59,7 +59,7 @@ namespace RestauranteAPI.Controllers
             }
         }
 
-        [HttpDelete("v1/Mesa")]
+        [HttpDelete("v1/DeletarMesa")]
         public IActionResult DeletarMesa(Model.Mesa mesa)
         {
             try
@@ -79,7 +79,7 @@ namespace RestauranteAPI.Controllers
         }
 
 
-        [HttpGet("v1/Mesa/{identificador}")]
+        [HttpGet("v1/SelecionarMesa/{identificador}")]
         public IActionResult SelecionarMesa(int identificador)
         {
             try
@@ -98,7 +98,7 @@ namespace RestauranteAPI.Controllers
             }
         }
 
-        [HttpGet("v1/Mesa")]
+        [HttpGet("v1/ListarMesas")]
         public IActionResult ListarMesas()
         {
             try

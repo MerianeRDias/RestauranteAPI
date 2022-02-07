@@ -395,6 +395,47 @@ namespace RestauranteAPI.Conexoes
         }
 
 
+        public Model.ReservaMesa SelecionarReserva(int identificador)
+        {
+            
+            try
+            {
+                _conexao.Open();
+
+                string sql = @"Select * FROM Reserva
+                               WHERE Identificador = @identificador";
+
+                using (var cmd = new SqlCommand(sql, _conexao))
+                {
+                    cmd.Parameters.AddWithValue("@identificador", identificador);
+                    var rdr = cmd.ExecuteReader();
+
+                    if (rdr.Read())
+                    {
+                        var reserva = new Model.ReservaMesa();
+                        reserva.Identificador = identificador;
+                        reserva.InicioReserva = Convert.ToDateTime(rdr["InicioReserva"]);
+                        reserva.FimReserva = Convert.ToDateTime(rdr["FimReserva"]);
+                        reserva.Mesa = new Model.Mesa()
+                        {
+                            Identificador = Convert.ToInt32(rdr["Mesa"])
+                        };
+
+                        return reserva ;
+                    }
+                    else
+                    {
+                        throw new InvalidOperationException("Reserva " + identificador + " não encontrada!");
+                    }
+                }
+            }
+            finally
+            {
+                _conexao.Close();
+            }
+        }
+
+
         public List<Model.ReservaMesa> ListarReservasMesas()
         {
             var reservas = new List<Model.ReservaMesa>();
